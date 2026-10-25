@@ -174,9 +174,9 @@ tail -6 "\$D/tvweb.log"
 # How this TV's own config exposes the dashboard, so the check at the end asks
 # for it only where it can answer. The TV keeps its own config.json, which is
 # the one that counts, not the copy on this computer.
-if tr -d ' \t\r\n' < "\$D/config.json" 2>/dev/null | grep -q '"web":{[^}]*"enabled":false'; then
+if tr -d ' \t\r\n' 2>/dev/null < "\$D/config.json" | grep -q '"web":{[^}]*"enabled":false'; then
   echo "TVWEB_WEB_OFF"
-elif tr -d ' \t\r\n' < "\$D/config.json" 2>/dev/null | grep -qE '"host":"(127\.[0-9.]*|localhost|::1)"'; then
+elif tr -d ' \t\r\n' 2>/dev/null < "\$D/config.json" | grep -qE '"host":"(127\.[0-9.]*|localhost|::1)"'; then
   echo "TVWEB_WEB_LOCAL"
 fi
 # The port the dashboard is on, which the Server tab can change.
